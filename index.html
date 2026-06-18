@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Butterflies</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        overflow: hidden;
+        background: #87ceeb;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+      }
+
+      .title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 4rem;
+        font-weight: bold;
+        text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        z-index: 100;
+      }
+
+      .butterfly {
+        position: absolute;
+        pointer-events: none;
+        user-select: none;
+        animation: flap 0.3s infinite alternate;
+      }
+
+      @keyframes flap {
+        from {
+          transform: scale(1) rotate(-5deg);
+        }
+        to {
+          transform: scale(1.1) rotate(5deg);
+        }
+      }
+
+      .code-card {
+        display: none;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 650px;
+        max-width: 90%;
+        background: #1e1e2f;
+        color: #d4d4d4;
+        border-radius: 20px;
+        padding: 20px;
+        font-family: monospace;
+        font-size: 14px;
+        z-index: 50;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Toshitha 🦋</h1>
+
+    <div class="code-card">
+      <pre>
+.butterfly {
+  background-color: rgba(0,0,0,.4);
+  border:none;
+  color:white;
+  padding:10px;
+  text-align:center;
+  display:inline-block;
+  border-radius:5px;
+}
+</pre
+      >
+    </div>
+
+    <script>
+      const butterflyEmoji = "🦋";
+      const total = 80;
+
+      for (let i = 0; i < total; i++) {
+        const b = document.createElement("div");
+
+        b.className = "butterfly";
+        b.innerHTML = butterflyEmoji;
+
+        const size = Math.random() * 35 + 15;
+
+        b.style.fontSize = size + "px";
+        b.style.left = Math.random() * window.innerWidth + "px";
+        b.style.top = Math.random() * window.innerHeight + "px";
+
+        document.body.appendChild(b);
+
+        animateButterfly(b);
+      }
+
+      function animateButterfly(el) {
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+
+        let vx = (Math.random() - 0.5) * 4;
+        let vy = (Math.random() - 0.5) * 4;
+
+        function move() {
+          x += vx;
+          y += vy;
+
+          if (x < 0 || x > window.innerWidth) {
+            vx *= -1;
+          }
+
+          if (y < 0 || y > window.innerHeight) {
+            vy *= -1;
+          }
+
+          el.style.left = x + "px";
+          el.style.top = y + "px";
+
+          requestAnimationFrame(move);
+        }
+
+        move();
+      }
+    </script>
+  </body>
+</html>
